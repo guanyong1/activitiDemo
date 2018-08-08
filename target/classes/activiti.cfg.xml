@@ -1,0 +1,15 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+        <!-- 连接数据库配置-->
+        <property name="jdbcDriver" value="com.mysql.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://10.0.0.11:3306/activitiDemo?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull"></property>
+        <property name="jdbcUsername" value="admin"></property>
+        <property name="jdbcPassword" value="Hkju]@(x5t6VJ,#sR45@BctYXunEkVfRPJttANSAEmsQWl7sA123"></property>
+        <!-- 没有表就创建表-->
+        <property name="databaseSchemaUpdate" value="true"></property>
+    </bean>
+
+</beans>
