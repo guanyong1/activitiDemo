@@ -10,7 +10,9 @@ import org.activiti.engine.task.Task;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author:guang yong
@@ -43,7 +45,7 @@ public class sequFlowTest {
     @Test
     public void startProcessInstance(){
         ProcessInstance processInstance = processEngine.getRuntimeService()
-                        .startProcessInstanceByKey("helloworld");
+                        .startProcessInstanceByKey("sequenceFlow");
     }
 
     /**
@@ -78,9 +80,13 @@ public class sequFlowTest {
     @Test
     public void comleteMyPersonalTask(){
         //任务ID
-        String taskId = "30002";
+        String taskId = "65004";
+        //完成任务的同时，设置流程变量，使用流程变量来指定完成任务后，下一个连线，对应sequenceFlow.bpmn文件中#{message=='不重要'}
+        Map<String,Object> map = new HashMap<>();
+//        map.put("message","不重要");
+        map.put("message","重要");
         processEngine.getTaskService()
-                        .complete(taskId);
+                        .complete(taskId,map);
         System.out.println("完成任务：任务ID："+taskId);
     }
 
