@@ -20,7 +20,7 @@ import java.util.Map;
  * @Date:Created in 16:55 2018/8/7
  * @Modified By:
  */
-public class groupTask01Test {
+public class groupTask03Test {
 
     //流程引擎对象
     ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
@@ -30,11 +30,11 @@ public class groupTask01Test {
      */
     @Test
     public void deploymentProcessDefinittion(){
-        InputStream inputStreamBpmn = this.getClass().getClassLoader().getResourceAsStream("groupTask/groupTask01.bpmn");
+        InputStream inputStreamBpmn = this.getClass().getClassLoader().getResourceAsStream("groupTask/groupTask03.bpmn");
         Deployment deployment = processEngine.getRepositoryService()
                                                 .createDeployment()
                                                 .name("组任务分配")
-                                                .addInputStream("groupTask01.bpmn",inputStreamBpmn)
+                                                .addInputStream("groupTask03.bpmn",inputStreamBpmn)
                                                 //.addInputStream("sequenceFlow.png",inputStreamPng)
                                                 .deploy();
         System.out.println(deployment.getId());
@@ -46,7 +46,7 @@ public class groupTask01Test {
     @Test
     public void startProcessInstance(){
         ProcessInstance processInstance = processEngine.getRuntimeService()
-                        .startProcessInstanceByKey("groupTask");
+                .startProcessInstanceByKey("groupTask03");
         System.out.println(processInstance.getId());
         System.out.println(processInstance.getProcessInstanceId());
     }

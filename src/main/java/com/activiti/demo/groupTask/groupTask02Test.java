@@ -20,7 +20,7 @@ import java.util.Map;
  * @Date:Created in 16:55 2018/8/7
  * @Modified By:
  */
-public class groupTask01Test {
+public class groupTask02Test {
 
     //流程引擎对象
     ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
@@ -30,11 +30,11 @@ public class groupTask01Test {
      */
     @Test
     public void deploymentProcessDefinittion(){
-        InputStream inputStreamBpmn = this.getClass().getClassLoader().getResourceAsStream("groupTask/groupTask01.bpmn");
+        InputStream inputStreamBpmn = this.getClass().getClassLoader().getResourceAsStream("groupTask/groupTask02.bpmn");
         Deployment deployment = processEngine.getRepositoryService()
                                                 .createDeployment()
                                                 .name("组任务分配")
-                                                .addInputStream("groupTask01.bpmn",inputStreamBpmn)
+                                                .addInputStream("groupTask02.bpmn",inputStreamBpmn)
                                                 //.addInputStream("sequenceFlow.png",inputStreamPng)
                                                 .deploy();
         System.out.println(deployment.getId());
@@ -45,8 +45,13 @@ public class groupTask01Test {
      */
     @Test
     public void startProcessInstance(){
+        //流程定义的key
+        String processDefinitionKey = "groupTask02";
+        /**启动流程实例的同时，设置流程变量，使用流程变量用来指定任务的办理人，对应bpmn文件中的#{userIds}*/
+        Map<String,Object> map = new HashMap<>();
+        map.put("userIds","蝎子,螃蟹,老鼠");
         ProcessInstance processInstance = processEngine.getRuntimeService()
-                        .startProcessInstanceByKey("groupTask");
+                        .startProcessInstanceByKey(processDefinitionKey,map);
         System.out.println(processInstance.getId());
         System.out.println(processInstance.getProcessInstanceId());
     }
